@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS PRO - Ultimate Creative Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00ffff;
+            --secondary: #ff00ff;
+            --dark: #0a0a0a;
+            --darker: #050505;
+            --light: #ffffff;
+            --accent: #ffff00;
+            --glow: rgba(0, 255, 255, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Syne', sans-serif;
+            background: var(--darker);
+            color: var(--light);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        #cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            mix-blend-mode: difference;
+        }
+
+        #cursor-glow {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.2s ease;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: 
+                linear-gradient(125deg, transparent 0%, var(--primary) 1%, transparent 2%) 0 0,
+                linear-gradient(235deg, transparent 0%, var(--secondary) 1%, transparent 2%) 0 0,
+                linear-gradient(315deg, transparent 0%, var(--accent) 1%, transparent 2%) 0 0;
+            background-size: 100px 100px;
+            animation: gridScroll 20s linear infinite;
+            opacity: 0.03;
+        }
+
+        @keyframes gridScroll {
+            0% { background-position: 0 0, 50px 50px, 100px 0; }
+            100% { background-position: 100px 100px, 150px 150px, 200px 100px; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+            animation: slideDown 1s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 48px;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px var(--glow);
+            animation: pulse 3s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes pulse {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.5); }
+        }
+
+        .tagline {
+            font-family: 'Space Mono', monospace;
+            color: var(--primary);
+            margin-top: 10px;
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(40px, 8vw, 120px);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            background: linear-gradient(180deg, var(--light), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glitchText 5s infinite;
+        }
+
+        @keyframes glitchText {
+            0%, 90%, 100% { text-shadow: none; }
+            91% { text-shadow: 2px 0 var(--primary), -2px 0 var(--secondary); }
+            93% { text-shadow: -2px 0 var(--primary), 2px 0 var(--secondary); }
+            95% { text-shadow: 0 0 var(--primary); }
+        }
+
+        .hero p {
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 700px;
+            margin: 0 auto 50px;
+            line-height: 1.6;
+        }
+
+        /* Feature Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 50px 0;
+        }
+
+        .feature-card {
+            position: relative;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.05), rgba(255, 0, 255, 0.05));
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(0, 255, 255, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            transition: all 0.6s;
+        }
+
+        .feature-card:hover::before {
+            animation: shine 1.5s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--primary);
+            box-shadow: 
+                0 20px 60px rgba(0, 255, 255, 0.3),
+                inset 0 0 20px rgba(0, 255, 255, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px currentColor);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .feature-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .feature-card .stats {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--accent);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Interactive Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.95), rgba(20, 20, 20, 0.95));
+            border: 2px solid var(--primary);
+            border-radius: 30px;
+            padding: 50px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 
+                0 0 100px rgba(0, 255, 255, 0.5),
+                inset 0 0 50px rgba(0, 255, 255, 0.1);
+            animation: modalSlide 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes modalSlide {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 40px;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.3s;
+            line-height: 1;
+        }
+
+        .close-modal:hover {
+            color: var(--secondary);
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 42px;
+            margin-bottom: 30px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+
+        /* Interactive Elements */
+        .interactive-canvas {
+            width: 100%;
+            height: 400px;
+            border: 2px solid var(--primary);
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            cursor: crosshair;
+            margin: 20px 0;
+            box-shadow: inset 0 0 30px rgba(0, 255, 255, 0.2);
+        }
+
+        .tool-palette {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .tool-btn {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
+            border: 1px solid var(--primary);
+            border-radius: 10px;
+            color: var(--light);
+            font-family: 'Space Mono', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .tool-btn:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.5);
+        }
+
+        .tool-btn.active {
+            background: var(--secondary);
+            border-color: var(--secondary);
+            color: var(--dark);
+        }
+
+        /* AI Generator Display */
+        .ai-output {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            min-height: 200px;
+            font-family: 'Space Mono', monospace;
+            font-size: 18px;
+            line-height: 1.8;
+            box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.1);
+        }
+
+        .typing-effect {
+            border-right: 2px solid var(--primary);
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* Data Visualization */
+        .chart-container {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            height: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            margin: 15px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            100% { left: 100%; }
+        }
+
+        /* Input Styles */
+        input, textarea, select {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
+            color: var(--light);
+            font-family: 'Syne', sans-serif;
+            font-size: 16px;
+            margin: 10px 0;
+            transition: all 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+        }
+
+        /* Volume Slider */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--glow);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            cursor: pointer;
+            border-radius: 50%;
+            border: none;
+            box-shadow: 0 0 10px var(--glow);
+        }
+
+        /* Loading Animation */
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(0, 255, 255, 0.2);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 30px auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Particle Effect */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: particleFloat 10s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Success Message */
+        .success-toast {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, rgba(0, 255, 0, 0.2), rgba(0, 255, 255, 0.2));
+            border: 2px solid #00ff00;
+            border-radius: 15px;
+            padding: 20px 30px;
+            color: var(--light);
+            font-family: 'Space Mono', monospace;
+            z-index: 2000;
+            animation: slideInRight 0.5s ease;
+            box-shadow: 0 10px 40px rgba(0, 255, 0, 0.3);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo { font-size: 32px; }
+            .hero h1 { font-size: 40px; }
+            .hero p { font-size: 18px; }
+            .feature-card { padding: 25px; }
+            .modal-content { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div id="cursor"></div>
+<div id="cursor-glow"></div>
+
+<!-- Animated Background -->
+<div class="bg-animation"></div>
+
+<!-- Particles -->
+<div class="particles" id="particles"></div>
+
+<div class="container">
+    <!-- Header -->
+    <header>
+        <div class="logo">NEXUS PRO</div>
+        <div class="tagline">// ULTRA CREATIVE PLATFORM</div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>KELAJAK<br>BU YERDA</h1>
+        <p>Professional darajadagi kreativ asboblar, AI texnologiyalari va limitless imkoniyatlar. Sizning hayollaringiz haqiqatga aylanadi.</p>
+    </section>
+
+    <!-- Features Grid -->
+    <div class="features-grid">
+        <!-- AI Text Generator -->
+        <div class="feature-card" onclick="openFeature('aiText')">
+            <div class="feature-icon">🤖</div>
+            <h3>AI Matn</h3>
+            <p>Sun'iy intellekt yordamida professional matnlar, she'rlar, hikoyalar yarating</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">Shablonlar</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">Variantlar</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Neural Art Studio -->
+        <div class="feature-card" onclick="openFeature('artStudio')">
+            <div class="feature-icon">🎨</div>
+            <h3>Rasm Studiya</h3>
+            <p>Professional rasm chizish, ranglar bilan o'ynash, digital art yaratish</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Asboblar</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">4K</span>
+                    <span class="stat-label">Sifat</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Playground -->
+        <div class="feature-card" onclick="openFeature('codePlay')">
+            <div class="feature-icon">💻</div>
+            <h3>Kod Maydon</h3>
+            <p>Real vaqtda kod yozish, test qilish va natijalarni ko'rish</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Tillar</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">Live</span>
+                    <span class="stat-label">Preview</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Visualizer -->
+        <div class="feature-card" onclick="openFeature('dataViz')">
+            <div class="feature-icon">📊</div>
+            <h3>Ma'lumot Viz</h3>
+            <p>Chiroyli grafiklar, diagrammalar va interaktiv vizualizatsiyalar</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">20+</span>
+                    <span class="stat-label">Chart turlari</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">3D</span>
+                    <span class="stat-label">Grafika</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Music Lab -->
+        <div class="feature-card" onclick="openFeature('musicLab')">
+            <div class="feature-icon">🎵</div>
+            <h3>Musiqa Lab</h3>
+            <p>Musiqa yaratish, melodiyalar tuzish, virtual instrumentlar</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Ovozlar</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">Pro</span>
+                    <span class="stat-label">Sifat</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mind Map -->
+        <div class="feature-card" onclick="openFeature('mindMap')">
+            <div class="feature-icon">🧠</div>
+            <h3>Fikr Xaritasi</h3>
+            <p>G'oyalaringizni vizual tarzda tashkil eting, brainstorming qiling</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">Node</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">Auto</span>
+                    <span class="stat-label">Layout</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Time Machine -->
+        <div class="feature-card" onclick="openFeature('timeMachine')">
+            <div class="feature-icon">⏰</div>
+            <h3>Vaqt Mashinasi</h3>
+            <p>Vaqtni boshqaring, tarix yarating, kelajakni rejalashtiring</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Ishlaydi</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">Smart</span>
+                    <span class="stat-label">AI</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Crypto Lab -->
+        <div class="feature-card" onclick="openFeature('cryptoLab')">
+            <div class="feature-icon">🔐</div>
+            <h3>Kripto Lab</h3>
+            <p>Ma'lumotlarni shifrlash, hash yaratish, xavfsizlik tekshiruvi</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">256</span>
+                    <span class="stat-label">Bit AES</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Secure</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Universe Explorer -->
+        <div class="feature-card" onclick="openFeature('universe')">
+            <div class="feature-icon">🌌</div>
+            <h3>Koinot Explorer</h3>
+            <p>3D koinot simulyatsiyasi, planetalar, yulduzlar, galaktikalar</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">1000+</span>
+                    <span class="stat-label">Ob'ektlar</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">3D</span>
+                    <span class="stat-label">WebGL</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AI Text Generator Modal -->
+<div id="aiText" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeFeature('aiText')">×</span>
+        <h2 class="modal-title">AI Matn Generator</h2>
+        
+        <select id="textType">
+            <option value="story">Hikoya</option>
+            <option value="poem">She'r</option>
+            <option value="business">Biznes matn</option>
+            <option value="funny">Hazil</option>
+            <option value="motivational">Motivatsiya</option>
+        </select>
+
+        <input type="text" id="textPrompt" placeholder="Mavzuni kiriting...">
+
+        <button class="tool-btn" onclick="generateAIText()">AI Yaratsin 🚀</button>
+
+        <div class="ai-output" id="aiOutput">
+            <span class="typing-effect">Natija bu yerda paydo bo'ladi...</span>
+        </div>
+    </div>
+</div>
+
+<!-- Art Studio Modal -->
+<div id="artStudio" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeFeature('artStudio')">×</span>
+        <h2 class="modal-title">Rasm Studiya</h2>
+        
+        <div class="tool-palette">
+            <button class="tool-btn active" onclick="selectTool('brush')">🖌️ Brush</button>
+            <button class="tool-btn" onclick="selectTool('eraser')">🧹 Eraser</button>
+            <button class="tool-btn" onclick="selectTool('fill')">🪣 Fill</button>
+            <button class="tool-btn" onclick="selectTool('spray')">💨 Spray</button>
+        </div>
+
+        <div class="tool-palette">
+            <button class="tool-btn" style="background: #000;" onclick="selectColor('#000')"></button>
+            <button class="tool-btn" style="background: #f00;" onclick="selectColor('#f00')"></button>
+            <button class="tool-btn" style="background: #0f0;" onclick="selectColor('#0f0')"></button>
+            <button class="tool-btn" style="background: #00f;" onclick="selectColor('#00f')"></button>
+            <button class="tool-btn" style="background: #ff0;" onclick="selectColor('#ff0')"></button>
+            <button class="tool-btn" style="background: #f0f;" onclick="selectColor('#f0f')"></button>
+            <button class="tool-btn" style="background: #0ff;" onclick="selectColor('#0ff')"></button>
+            <button class="tool-btn" style="background: #fff;" onclick="selectColor('#fff')"></button>
+        </div>
+
+        <canvas id="artCanvas" class="interactive-canvas"></canvas>
+
+        <div class="tool-palette">
+            <button class="tool-btn" onclick="clearArt()">🗑️ Tozalash</button>
+            <button class="tool-btn" onclick="saveArt()">💾 Saqlash</button>
+            <button class="tool-btn" onclick="addNeonEffect()">✨ Neon Effect</button>
+        </div>
+    </div>
+</div>
+
+<!-- Code Playground Modal -->
+<div id="codePlay" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeFeature('codePlay')">×</span>
+        <h2 class="modal-title">Kod Playground</h2>
+        
+        <select id="codeLang">
+            <option value="html">HTML</option>
+            <option value="css">CSS</option>
+            <option value="js">JavaScript</option>
+            <option value="python">Python</option>
+        </select>
+
+        <textarea id="codeEditor" rows="10" placeholder="Kodingizni bu yerga yozing...">// Bu yerda kod yozing
+console.log('Salom Dunyo!');</textarea>
+
+        <button class="tool-btn" onclick="runCode()">▶️ Ishga Tushir</button>
+
+        <div class="ai-output" id="codeOutput">
+            <span style="color: var(--primary);">Natija:</span><br>
+            <span id="codeResult">Kodni ishga tushiring...</span>
+        </div>
+    </div>
+</div>
+
+<!-- Data Visualizer Modal -->
+<div id="dataViz" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeFeature('dataViz')">×</span>
+        <h2 class="modal-title">Ma'lumot Visualizer</h2>
+        
+        <div class="chart-container">
+            <h3 style="color: var(--primary); margin-bottom: 20px;">Performance Metrics</h3>
+            
+            <div style="margin-bottom: 10px;">
+                <span style="color: rgba(255,255,255,0.7);">CPU Usage</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 75%"></div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 10px;">
+                <span style="color: rgba(255,255,255,0.7);">Memory</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 45%"></div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 10px;">
+                <span style="color: rgba(255,255,255,0.7);">Network</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 90%"></div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 10px;">
+                <span style="color: rgba(255,255,255,0.7);">Storage</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 60%"></div>
+                </div>
+            </div>
+        </div>
+
+        <button class="tool-btn" onclick="randomizeData()">🎲 Tasodifiy Ma'lumot</button>
+    </div>
+</div>
+
+<!-- Music Lab Modal -->
+<div id="musicLab" class="modal">
+    <div class="modal-content" style="max-width: 900px;">
+        <span class="close-modal" onclick="closeFeature('musicLab')">×</span>
+        <h2 class="modal-title">Musiqa Laboratory</h2>
+        
+        <!-- Music Player -->
+        <div class="ai-output" style="background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(20,20,20,0.8)); padding: 30px;">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <div style="font-size: 80px; margin-bottom: 15px;" id="musicEmoji">🎵</div>
+                <h3 style="color: var(--primary); font-size: 24px;" id="currentSong">Qo'shiq tanlang</h3>
+                <p style="color: rgba(255,255,255,0.7); margin-top: 5px;" id="currentArtist">Artist</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar" style="margin: 20px 0;">
+                <div class="progress-fill" id="musicProgress" style="width: 0%"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; color: rgba(255,255,255,0.5); font-size: 12px; font-family: 'Space Mono', monospace;">
+                <span id="currentTime">0:00</span>
+                <span id="totalTime">0:00</span>
+            </div>
+
+            <!-- Player Controls -->
+            <div style="display: flex; justify-content: center; gap: 20px; margin: 30px 0;">
+                <button class="tool-btn" onclick="previousSong()" style="font-size: 24px;">⏮️</button>
+                <button class="tool-btn" onclick="togglePlay()" style="font-size: 24px; padding: 20px 40px;" id="playBtn">▶️</button>
+                <button class="tool-btn" onclick="nextSong()" style="font-size: 24px;">⏭️</button>
+            </div>
+
+            <!-- Volume Control -->
+            <div style="display: flex; align-items: center; gap: 15px; margin: 20px 0;">
+                <span style="font-size: 20px;">🔊</span>
+                <input type="range" min="0" max="100" value="70" id="volumeControl" 
+                       onchange="changeVolume(this.value)"
+                       style="flex: 1; height: 8px; background: rgba(0,255,255,0.2); border-radius: 10px; outline: none; -webkit-appearance: none;">
+                <span id="volumeDisplay" style="font-family: 'Space Mono', monospace; color: var(--primary); min-width: 40px;">70%</span>
+            </div>
+        </div>
+
+        <!-- Music Categories -->
+        <div style="margin: 30px 0;">
+            <h3 style="color: var(--primary); margin-bottom: 15px; font-size: 20px;">📀 Kategoriyalar</h3>
+            <div class="tool-palette">
+                <button class="tool-btn active" onclick="selectCategory('macan')" id="catMacan">🎤 Macan</button>
+                <button class="tool-btn" onclick="selectCategory('uzbek')" id="catUzbek">🇺🇿 O'zbek</button>
+                <button class="tool-btn" onclick="selectCategory('russian')" id="catRussian">🇷🇺 Rus</button>
+                <button class="tool-btn" onclick="selectCategory('english')" id="catEnglish">🇬🇧 Ingliz</button>
+                <button class="tool-btn" onclick="selectCategory('turkish')" id="catTurkish">🇹🇷 Turk</button>
+            </div>
+        </div>
+
+        <!-- Playlist -->
+        <div class="ai-output" style="max-height: 400px; overflow-y: auto; padding: 20px;">
+            <h3 style="color: var(--primary); margin-bottom: 20px; font-size: 20px;">📋 Playlist</h3>
+            <div id="playlist"></div>
+        </div>
+
+        <!-- Virtual Piano -->
+        <div style="margin-top: 30px; border-top: 2px solid rgba(0,255,255,0.2); padding-top: 30px;">
+            <h3 style="color: var(--primary); margin-bottom: 15px; font-size: 20px;">🎹 Virtual Piano</h3>
+            <div class="tool-palette">
+                <button class="tool-btn" onclick="playNote('C')">C</button>
+                <button class="tool-btn" onclick="playNote('D')">D</button>
+                <button class="tool-btn" onclick="playNote('E')">E</button>
+                <button class="tool-btn" onclick="playNote('F')">F</button>
+                <button class="tool-btn" onclick="playNote('G')">G</button>
+                <button class="tool-btn" onclick="playNote('A')">A</button>
+                <button class="tool-btn" onclick="playNote('B')">B</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mind Map Modal -->
+<div id="mindMap" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeFeature('mindMap')">×</span>
+        <h2 class="modal-title">Fikr Xaritasi</h2>
+        
+        <input type="text" id="nodeInput" placeholder="G'oya yoki mavzuni kiriting...">
+        <button class="tool-btn" onclick="addMindNode()">➕ Node Qo'shish</button>
+
+        <div class="ai-output" id="mindMapDisplay">
+            <div style="text-align: center; padding: 40px;">
+                <div style="font-size: 64px; margin-bottom: 20px;">🧠</div>
+                <p style="color: var(--primary);">Markaziy G'oya</p>
+                <div id="mindNodes" style="margin-top: 30px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Time Machine Modal -->
+<div id="timeMachine" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeFeature('timeMachine')">×</span>
+        <h2 class="modal-title">Vaqt Mashinasi</h2>
+        
+        <div class="chart-container">
+            <h3 style="color: var(--primary); margin-bottom: 20px;">⏰ Hozirgi Vaqt</h3>
+            <div id="digitalClock" style="font-family: 'Orbitron'; font-size: 48px; text-align: center; color: var(--accent);"></div>
+            <div id="dateDisplay" style="font-family: 'Space Mono'; font-size: 18px; text-align: center; color: var(--primary); margin-top: 10px;"></div>
+        </div>
+
+        <div class="tool-palette">
+            <button class="tool-btn" onclick="startTimer()">⏱️ Timer</button>
+            <button class="tool-btn" onclick="startStopwatch()">⏲️ Stopwatch</button>
+            <button class="tool-btn" onclick="setAlarm()">⏰ Alarm</button>
+        </div>
+    </div>
+</div>
+
+<!-- Crypto Lab Modal -->
+<div id="cryptoLab" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeFeature('cryptoLab')">×</span>
+        <h2 class="modal-title">Kripto Laboratory</h2>
+        
+        <textarea id="cryptoInput" rows="4" placeholder="Shifrlash uchun matn kiriting..."></textarea>
+
+        <div class="tool-palette">
+            <button class="tool-btn" onclick="encryptText()">🔐 Shifrlash</button>
+            <button class="tool-btn" onclick="decryptText()">🔓 Deshifrlash</button>
+            <button class="tool-btn" onclick="generateHash()"># Hash</button>
+        </div>
+
+        <div class="ai-output" id="cryptoOutput">
+            Natija bu yerda ko'rinadi...
+        </div>
+    </div>
+</div>
+
+<!-- Universe Explorer Modal -->
+<div id="universe" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeFeature('universe')">×</span>
+        <h2 class="modal-title">Koinot Explorer</h2>
+        
+        <div class="ai-output" style="background: radial-gradient(circle, rgba(0,255,255,0.1), transparent); min-height: 400px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+            <div style="font-size: 120px; margin-bottom: 20px;">🌌</div>
+            <p style="font-size: 24px; color: var(--primary);">Koinot Simulyatsiyasi</p>
+            <p style="color: rgba(255,255,255,0.7); margin-top: 10px;">∞ Yulduzlar | 100+ Planetalar | Real fizika</p>
+        </div>
+
+        <div class="tool-palette">
+            <button class="tool-btn" onclick="exploreSpace()">🚀 Tadqiq Qilish</button>
+            <button class="tool-btn" onclick="randomPlanet()">🪐 Tasodifiy Planeta</button>
+            <button class="tool-btn" onclick="showGalaxy()">🌌 Galaktika</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// Custom Cursor
+const cursor = document.getElementById('cursor');
+const cursorGlow = document.getElementById('cursor-glow');
+
+document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    cursorGlow.style.left = (e.clientX - 20) + 'px';
+    cursorGlow.style.top = (e.clientY - 20) + 'px';
+});
+
+// Particles
+function createParticles() {
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 10 + 's';
+        particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+        container.appendChild(particle);
+    }
+}
+createParticles();
+
+// Modal Functions
+function openFeature(id) {
+    document.getElementById(id).classList.add('active');
+    if (id === 'artStudio') initArtCanvas();
+    if (id === 'timeMachine') startClock();
+    if (id === 'musicLab') {
+        displayPlaylist();
+        loadSong(0);
+    }
+}
+
+function closeFeature(id) {
+    document.getElementById(id).classList.remove('active');
+}
+
+// AI Text Generator
+const aiTemplates = {
+    story: [
+        "Bir paytlar {topic} haqida ajoyib hikoya bo'lgan edi. Bu hikoyada qahramonlar o'zlarining orzulariga erishish uchun kurashdilar...",
+        "Uzoq galaktikada {topic} nomli sayyora bor edi. Bu yerda hayot juda g'ayrioddiy shaklda rivojlangan...",
+        "{topic} - bu faqat oddiy narsa emas, bu butun dunyo. Keling, bu dunyoga sayohat qilaylik..."
+    ],
+    poem: [
+        "Osmon ostida, {topic} kabi,\nYuragim uchar, qanotlar qaqib.\nOrzular baland, umidlar cheksiz,\nKelajak yorug', yo'llar kengroq.",
+        "{topic}ning go'zalligi,\nYurakda qoladi abadiy.\nUmr uzog', vaqt qisqa,\nLekin go'zallik - abadiy ishonch."
+    ],
+    business: [
+        "Hurmatli hamkorlar! {topic} loyihamiz sizga yangi imkoniyatlar taqdim etadi. Bizning professional jamoamiz...",
+        "{topic} sohasida tajribali mutaxassislar sifatida, biz sizga eng yaxshi xizmatlarni taklif qilamiz..."
+    ],
+    funny: [
+        "Bilasizmi, {topic} haqida eng qiziq narsa shuki... men ham bilmayman! 😄",
+        "{topic}? Ha, bu haqida hikoya aytib beraman. Bir kuni... yo'q, kutib turing, bu juda qiziq bo'ladi! 🤣"
+    ],
+    motivational: [
+        "{topic} - bu sizning kuchingiz! Hech qachon taslim bo'lmang. Oldinga! 💪",
+        "Har bir {topic} sizni maqsadingizga yaqinlashtiradi. Ishon va harakat qil! 🚀"
+    ]
+};
+
+function generateAIText() {
+    const type = document.getElementById('textType').value;
+    const prompt = document.getElementById('textPrompt').value || 'hayot';
+    const output = document.getElementById('aiOutput');
+    
+    const templates = aiTemplates[type];
+    let text = templates[Math.floor(Math.random() * templates.length)];
+    text = text.replace('{topic}', prompt);
+    
+    output.innerHTML = '';
+    let i = 0;
+    const interval = setInterval(() => {
+        if (i < text.length) {
+            output.innerHTML += text[i];
+            i++;
+        } else {
+            clearInterval(interval);
+        }
+    }, 30);
+    
+    showToast('✅ AI matn yaratildi!');
+}
+
+// Art Studio
+let canvas, ctx, isDrawing = false;
+let currentTool = 'brush';
+let currentColor = '#00ffff';
+
+function initArtCanvas() {
+    canvas = document.getElementById('artCanvas');
+    ctx = canvas.getContext('2d');
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    canvas.addEventListener('mousedown', startDraw);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDraw);
+    canvas.addEventListener('mouseout', stopDraw);
+}
+
+function startDraw(e) {
+    isDrawing = true;
+    const rect = canvas.getBoundingClientRect();
+    ctx.beginPath();
+    ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+}
+
+function draw(e) {
+    if (!isDrawing) return;
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    if (currentTool === 'brush') {
+        ctx.strokeStyle = currentColor;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = currentColor;
+        ctx.lineTo(x, y);
+        ctx.stroke();
+    } else if (currentTool === 'eraser') {
+        ctx.clearRect(x - 10, y - 10, 20, 20);
+    } else if (currentTool === 'spray') {
+        for (let i = 0; i < 10; i++) {
+            const offsetX = (Math.random() - 0.5) * 20;
+            const offsetY = (Math.random() - 0.5) * 20;
+            ctx.fillStyle = currentColor;
+            ctx.fillRect(x + offsetX, y + offsetY, 2, 2);
+        }
+    }
+}
+
+function stopDraw() {
+    isDrawing = false;
+    ctx.shadowBlur = 0;
+}
+
+function selectTool(tool) {
+    currentTool = tool;
+    document.querySelectorAll('#artStudio .tool-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+}
+
+function selectColor(color) {
+    currentColor = color;
+}
+
+function clearArt() {
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    showToast('🗑️ Canvas tozalandi!');
+}
+
+function saveArt() {
+    const link = document.createElement('a');
+    link.download = 'nexus-art.png';
+    link.href = canvas.toDataURL();
+    link.click();
+    showToast('💾 Rasm saqlandi!');
+}
+
+function addNeonEffect() {
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
+    
+    for (let i = 0; i < data.length; i += 4) {
+        if (data[i] > 0 || data[i+1] > 0 || data[i+2] > 0) {
+            data[i] = Math.min(255, data[i] * 1.5);
+            data[i+1] = Math.min(255, data[i+1] * 1.5);
+            data[i+2] = Math.min(255, data[i+2] * 1.5);
+        }
+    }
+    
+    ctx.putImageData(imageData, 0, 0);
+    showToast('✨ Neon effekt qo\'shildi!');
+}
+
+// Code Playground
+function runCode() {
+    const code = document.getElementById('codeEditor').value;
+    const lang = document.getElementById('codeLang').value;
+    const result = document.getElementById('codeResult');
+    
+    if (lang === 'js') {
+        try {
+            const output = eval(code);
+            result.textContent = output !== undefined ? output : 'Kod muvaffaqiyatli bajarildi!';
+            result.style.color = '#00ff00';
+        } catch (e) {
+            result.textContent = 'Xato: ' + e.message;
+            result.style.color = '#ff0000';
+        }
+    } else {
+        result.textContent = `${lang.toUpperCase()} kod simulyatsiya qilindi!`;
+        result.style.color = '#00ffff';
+    }
+    
+    showToast('▶️ Kod ishga tushirildi!');
+}
+
+// Data Visualizer
+function randomizeData() {
+    const bars = document.querySelectorAll('.progress-fill');
+    bars.forEach(bar => {
+        const randomWidth = Math.random() * 100;
+        bar.style.width = randomWidth + '%';
+    });
+    showToast('🎲 Ma\'lumotlar yangilandi!');
+}
+
+// Music Lab
+const notes = {
+    'C': 261.63,
+    'D': 293.66,
+    'E': 329.63,
+    'F': 349.23,
+    'G': 392.00,
+    'A': 440.00,
+    'B': 493.88
+};
+
+function playNote(note) {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.frequency.value = notes[note];
+    oscillator.type = 'sine';
+    
+    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1);
+    
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 1);
+}
+
+// Music Player
+const musicLibrary = {
+    macan: [
+        { title: "Bir Bol", artist: "Macan", duration: "3:45", emoji: "🎤", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
+        { title: "Hep Mi Ben", artist: "Macan", duration: "3:20", emoji: "🎤", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
+        { title: "Aramam", artist: "Macan", duration: "3:55", emoji: "🎤", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" },
+        { title: "Sevmesem", artist: "Macan", duration: "3:30", emoji: "🎤", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" },
+        { title: "Yalancı", artist: "Macan", duration: "4:10", emoji: "🎤", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3" },
+        { title: "Gel Gel", artist: "Macan", duration: "3:25", emoji: "🎤", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3" }
+    ],
+    uzbek: [
+        { title: "Unutma Meni", artist: "Shahzoda", duration: "3:40", emoji: "🎵", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3" },
+        { title: "Senga", artist: "Rayhon", duration: "3:35", emoji: "🎵", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" },
+        { title: "Kel Yana", artist: "Lola Yuldasheva", duration: "3:50", emoji: "🎵", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" },
+        { title: "Yuragim", artist: "Yulduz Usmonova", duration: "4:05", emoji: "🎵", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3" },
+        { title: "Sevgi Qo'shig'i", artist: "Setora", duration: "3:45", emoji: "🎵", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3" },
+        { title: "Muhabbat", artist: "Umidaxon", duration: "3:30", emoji: "🎵", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3" },
+        { title: "Yorim", artist: "Bojalar", duration: "3:25", emoji: "🎵", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3" }
+    ],
+    russian: [
+        { title: "Малиновая Лада", artist: "Morgenshtern", duration: "3:15", emoji: "🎸", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3" },
+        { title: "Мне Пох", artist: "Morgenshtern", duration: "2:55", emoji: "🎸", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3" },
+        { title: "Cadillac", artist: "Morgenshtern ft. Элджей", duration: "3:30", emoji: "🎸", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3" },
+        { title: "Лето", artist: "Би-2", duration: "4:20", emoji: "🎸", url: "https://cdn.pixabay.com/download/audio/2022/03/10/audio_4a468f784a.mp3" },
+        { title: "Группа крови", artist: "Кино", duration: "4:45", emoji: "🎸", url: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" },
+        { title: "Звезда по имени Солнце", artist: "Кино", duration: "3:40", emoji: "🎸", url: "https://cdn.pixabay.com/download/audio/2022/08/02/audio_37dcc90432.mp3" },
+        { title: "На заре", artist: "Альянс", duration: "4:10", emoji: "🎸", url: "https://cdn.pixabay.com/download/audio/2021/08/04/audio_d1718ab41b.mp3" }
+    ],
+    english: [
+        { title: "Blinding Lights", artist: "The Weeknd", duration: "3:20", emoji: "🎧", url: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_9be89f7a2e.mp3" },
+        { title: "Starboy", artist: "The Weeknd", duration: "3:50", emoji: "🎧", url: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" },
+        { title: "Peaches", artist: "Justin Bieber", duration: "3:18", emoji: "🎧", url: "https://cdn.pixabay.com/download/audio/2021/08/04/audio_d1718ab41b.mp3" },
+        { title: "Stay", artist: "Justin Bieber", duration: "2:21", emoji: "🎧", url: "https://cdn.pixabay.com/download/audio/2022/08/02/audio_37dcc90432.mp3" },
+        { title: "Shape of You", artist: "Ed Sheeran", duration: "3:53", emoji: "🎧", url: "https://cdn.pixabay.com/download/audio/2022/03/10/audio_4a468f784a.mp3" },
+        { title: "Bad Habits", artist: "Ed Sheeran", duration: "3:50", emoji: "🎧", url: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" },
+        { title: "Levitating", artist: "Dua Lipa", duration: "3:23", emoji: "🎧", url: "https://cdn.pixabay.com/download/audio/2021/08/04/audio_d1718ab41b.mp3" }
+    ],
+    turkish: [
+        { title: "Gel Gel", artist: "Ebru Yaşar", duration: "3:45", emoji: "🎼", url: "https://cdn.pixabay.com/download/audio/2022/08/02/audio_37dcc90432.mp3" },
+        { title: "Aşk Laftan Anlamaz", artist: "Buray", duration: "3:55", emoji: "🎼", url: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_9be89f7a2e.mp3" },
+        { title: "Paramparça", artist: "Tarkan", duration: "4:10", emoji: "🎼", url: "https://cdn.pixabay.com/download/audio/2021/08/04/audio_d1718ab41b.mp3" },
+        { title: "Şımarık", artist: "Tarkan", duration: "3:40", emoji: "🎼", url: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" },
+        { title: "Yanıyorum", artist: "Mustafa Ceceli", duration: "3:30", emoji: "🎼", url: "https://cdn.pixabay.com/download/audio/2022/03/10/audio_4a468f784a.mp3" },
+        { title: "Seni Seviyorum", artist: "Sıla", duration: "3:35", emoji: "🎼", url: "https://cdn.pixabay.com/download/audio/2022/08/02/audio_37dcc90432.mp3" }
+    ]
+};
+
+let currentCategory = 'macan';
+let currentSongIndex = 0;
+let isPlaying = false;
+let audioPlayer = new Audio();
+let progressUpdateInterval = null;
+
+// Audio event listeners
+audioPlayer.addEventListener('loadedmetadata', function() {
+    document.getElementById('totalTime').textContent = formatTime(Math.floor(audioPlayer.duration));
+});
+
+audioPlayer.addEventListener('timeupdate', function() {
+    if (audioPlayer.duration) {
+        const percentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+        document.getElementById('musicProgress').style.width = percentage + '%';
+        document.getElementById('currentTime').textContent = formatTime(Math.floor(audioPlayer.currentTime));
+    }
+});
+
+audioPlayer.addEventListener('ended', function() {
+    nextSong();
+});
+
+function selectCategory(category) {
+    currentCategory = category;
+    currentSongIndex = 0;
+    
+    // Stop current playback
+    audioPlayer.pause();
+    isPlaying = false;
+    document.getElementById('playBtn').textContent = '▶️';
+    
+    // Update category buttons
+    document.querySelectorAll('#musicLab .tool-palette button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.getElementById('cat' + category.charAt(0).toUpperCase() + category.slice(1)).classList.add('active');
+    
+    // Display playlist
+    displayPlaylist();
+    loadSong(0);
+}
+
+function displayPlaylist() {
+    const playlist = musicLibrary[currentCategory];
+    const container = document.getElementById('playlist');
+    
+    container.innerHTML = playlist.map((song, index) => `
+        <div onclick="loadSong(${index})" 
+             style="padding: 15px; margin-bottom: 10px; background: ${index === currentSongIndex ? 'rgba(0,255,255,0.2)' : 'rgba(0,0,0,0.3)'}; 
+                    border: 1px solid ${index === currentSongIndex ? 'var(--primary)' : 'rgba(255,255,255,0.1)'}; 
+                    border-radius: 10px; cursor: pointer; transition: all 0.3s; display: flex; justify-content: space-between; align-items: center;"
+             onmouseover="this.style.background='rgba(0,255,255,0.1)'" 
+             onmouseout="this.style.background='${index === currentSongIndex ? 'rgba(0,255,255,0.2)' : 'rgba(0,0,0,0.3)'}'">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="font-size: 32px;">${song.emoji}</div>
+                <div>
+                    <div style="color: var(--light); font-weight: bold; margin-bottom: 5px;">${song.title}</div>
+                    <div style="color: rgba(255,255,255,0.6); font-size: 14px;">${song.artist}</div>
+                </div>
+            </div>
+            <div style="color: var(--primary); font-family: 'Space Mono', monospace;">${song.duration}</div>
+        </div>
+    `).join('');
+}
+
+function loadSong(index) {
+    currentSongIndex = index;
+    const song = musicLibrary[currentCategory][index];
+    
+    // Update UI
+    document.getElementById('currentSong').textContent = song.title;
+    document.getElementById('currentArtist').textContent = song.artist;
+    document.getElementById('musicEmoji').textContent = song.emoji;
+    document.getElementById('totalTime').textContent = song.duration;
+    
+    // Load audio
+    audioPlayer.src = song.url;
+    audioPlayer.load();
+    
+    // Reset progress
+    document.getElementById('musicProgress').style.width = '0%';
+    document.getElementById('currentTime').textContent = '0:00';
+    
+    displayPlaylist();
+    
+    // Auto play if was playing
+    if (isPlaying) {
+        audioPlayer.play();
+    }
+}
+
+function togglePlay() {
+    if (isPlaying) {
+        pauseMusic();
+    } else {
+        playMusic();
+    }
+}
+
+function playMusic() {
+    audioPlayer.play().then(() => {
+        isPlaying = true;
+        document.getElementById('playBtn').textContent = '⏸️';
+        showToast('▶️ Musiqa ijro etilmoqda!');
+    }).catch(error => {
+        console.log('Playback error:', error);
+        showToast('⚠️ Musiqa yuklanmoqda...');
+    });
+}
+
+function pauseMusic() {
+    audioPlayer.pause();
+    isPlaying = false;
+    document.getElementById('playBtn').textContent = '▶️';
+    showToast('⏸️ To\'xtatildi');
+}
+
+function stopMusic() {
+    audioPlayer.pause();
+    audioPlayer.currentTime = 0;
+    isPlaying = false;
+    document.getElementById('playBtn').textContent = '▶️';
+    document.getElementById('musicProgress').style.width = '0%';
+    document.getElementById('currentTime').textContent = '0:00';
+}
+
+function nextSong() {
+    const playlist = musicLibrary[currentCategory];
+    currentSongIndex = (currentSongIndex + 1) % playlist.length;
+    const wasPlaying = isPlaying;
+    loadSong(currentSongIndex);
+    if (wasPlaying) {
+        playMusic();
+    }
+}
+
+function previousSong() {
+    const playlist = musicLibrary[currentCategory];
+    currentSongIndex = (currentSongIndex - 1 + playlist.length) % playlist.length;
+    const wasPlaying = isPlaying;
+    loadSong(currentSongIndex);
+    if (wasPlaying) {
+        playMusic();
+    }
+}
+
+function changeVolume(value) {
+    audioPlayer.volume = value / 100;
+    document.getElementById('volumeDisplay').textContent = value + '%';
+}
+
+function parseDuration(duration) {
+    const parts = duration.split(':');
+    return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+}
+
+function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return mins + ':' + (secs < 10 ? '0' : '') + secs;
+}
+
+// Initialize playlist on modal open
+document.addEventListener('DOMContentLoaded', () => {
+    audioPlayer.volume = 0.7; // Set initial volume to 70%
+});
+
+// Mind Map
+const mindNodes = [];
+
+function addMindNode() {
+    const input = document.getElementById('nodeInput').value;
+    if (!input) return;
+    
+    mindNodes.push(input);
+    const display = document.getElementById('mindNodes');
+    
+    display.innerHTML = mindNodes.map((node, i) => `
+        <div style="display: inline-block; margin: 10px; padding: 15px 25px; background: rgba(0,255,255,0.2); border: 2px solid var(--primary); border-radius: 20px; color: var(--light);">
+            ${i + 1}. ${node}
+        </div>
+    `).join('');
+    
+    document.getElementById('nodeInput').value = '';
+    showToast('✅ Node qo\'shildi!');
+}
+
+// Time Machine
+function startClock() {
+    setInterval(() => {
+        const now = new Date();
+        const clock = document.getElementById('digitalClock');
+        const date = document.getElementById('dateDisplay');
+        
+        if (clock) {
+            clock.textContent = now.toLocaleTimeString('uz-UZ');
+        }
+        if (date) {
+            date.textContent = now.toLocaleDateString('uz-UZ', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+        }
+    }, 1000);
+}
+
+function startTimer() {
+    const seconds = prompt('Necha soniya?');
+    if (seconds) {
+        showToast(`⏱️ ${seconds} soniyalik timer boshlandi!`);
+    }
+}
+
+function startStopwatch() {
+    showToast('⏲️ Stopwatch boshlandi!');
+}
+
+function setAlarm() {
+    showToast('⏰ Alarm o\'rnatildi!');
+}
+
+// Crypto Lab
+function encryptText() {
+    const text = document.getElementById('cryptoInput').value;
+    const encrypted = btoa(text);
+    document.getElementById('cryptoOutput').textContent = '🔐 Shifrlangan: ' + encrypted;
+    showToast('🔐 Matn shifrlandi!');
+}
+
+function decryptText() {
+    const text = document.getElementById('cryptoInput').value;
+    try {
+        const decrypted = atob(text);
+        document.getElementById('cryptoOutput').textContent = '🔓 Deshifrlangan: ' + decrypted;
+        showToast('🔓 Matn deshifrlandi!');
+    } catch {
+        document.getElementById('cryptoOutput').textContent = '❌ Noto\'g\'ri shifrlangan matn!';
+    }
+}
+
+function generateHash() {
+    const text = document.getElementById('cryptoInput').value;
+    let hash = 0;
+    for (let i = 0; i < text.length; i++) {
+        const char = text.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash;
+    }
+    document.getElementById('cryptoOutput').textContent = '# Hash: ' + Math.abs(hash).toString(16);
+    showToast('# Hash yaratildi!');
+}
+
+// Universe
+const planets = ['Merkuriy', 'Venera', 'Yer', 'Mars', 'Yupiter', 'Saturn', 'Uran', 'Neptun'];
+
+function exploreSpace() {
+    showToast('🚀 Kosmik sayohat boshlandi!');
+}
+
+function randomPlanet() {
+    const planet = planets[Math.floor(Math.random() * planets.length)];
+    showToast(`🪐 Siz ${planet}ga teleport qilindingiz!`);
+}
+
+function showGalaxy() {
+    showToast('🌌 Galaktika ko\'rinishi faollashtirildi!');
+}
+
+// Toast Notification
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'success-toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+
+// Close modal on outside click
+window.onclick = function(event) {
+    if (event.target.classList.contains('modal')) {
+        event.target.classList.remove('active');
+    }
+}
+
+// Initial animation
+window.addEventListener('load', () => {
+    showToast('🚀 NEXUS PRO yuklandi!');
+});
+</script>
+
+</body>
+</html>
